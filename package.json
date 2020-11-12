@@ -13,8 +13,22 @@
     "test:typescript": "tsd",
     "unit": "tap test/**/*.test.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    ".env",
+    "dotenv",
+    "env",
+    "env var",
+    "environment",
+    "environment variable",
+    "validation",
+    "fastify",
+    "plugin"
+  ],
+  "author": "Alessandro Magionami - @alemagio",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alemagio/fastify-envalid.git"
+  },
   "license": "MIT",
   "types": "index.d.ts",
   "dependencies": {
