@@ -1,5 +1,5 @@
 import fastify from 'fastify'
-import fastifyEnvalid, { Validators, CleanEnvFunction, StrictCleanEnvFunction } from '..'
+import fastifyEnvalid, { Validators, CleanEnvFunction } from '..'
 import { expectType } from 'tsd'
 import { Spec, ValidatorSpec } from 'envalid'
 
@@ -9,7 +9,7 @@ try {
   await app.ready()
   await app.register(fastifyEnvalid)
   expectType<Validators>(app.validators)
-  expectType<CleanEnvFunction|StrictCleanEnvFunction>(app.cleanEnv)
+  expectType<CleanEnvFunction>(app.cleanEnv)
   expectType<<T>(
   parser: (input: string) => T,
   type?: string
