@@ -1,0 +1,10 @@
+{
+    "extends": "fastify-tsconfig",
+    "compilerOptions": {
+      "noEmit": true,
+      "esModuleInterop": true
+    },
+    "include": [
+        "**/*.ts"
+    ]
+}
