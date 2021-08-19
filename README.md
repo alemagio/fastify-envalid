@@ -12,9 +12,12 @@ npm i fastify-envalid
 ## Usage
 Require `fastify-envalid` and register.
 ```js
-const fastify = require('fastify')()
+import fastify from 'fastify'
+import fastifyEnvalid from 'fastify-envalid'
 
-fastify.register(require('fastify-envalid'))
+const app = fastify()
+
+fastify.register(fastifyEnvalid)
 
 fastify.listen(3000)
 ```
