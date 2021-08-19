@@ -1,5 +1,5 @@
-const { test } = require('tap')
-const {
+import { test } from 'tap'
+import {
   str,
   bool,
   num,
@@ -9,19 +9,26 @@ const {
   json,
   cleanEnv,
   makeValidator
-} = require('envalid')
+} from 'envalid'
+import fastify from 'fastify'
+import fastifyEnvalid from '../index.js'
+
+const env = {
+  API_KEY: 123,
+  NODE_ENV: 'production'
+}
 
 test('should register the correct decorators', async t => {
   t.plan(6)
 
-  const app = require('fastify')()
+  const app = fastify()
 
-  app.register(require('..'))
+  app.register(fastifyEnvalid)
 
   await app.ready()
 
-  t.true(app.hasDecorator('validators'))
-  t.deepEqual(app.validators, {
+  t.ok(app.hasDecorator('validators'))
+  t.same(app.validators, {
     str,
     bool,
     num,
@@ -30,18 +37,29 @@ test('should register the correct decorators', async t => {
     url,
     json
   })
-  t.true(app.hasDecorator('cleanEnv'))
-  t.deepEqual(app.cleanEnv, cleanEnv)
-  t.true(app.hasDecorator('makeValidator'))
-  t.deepEqual(app.makeValidator, makeValidator)
+  t.ok(app.hasDecorator('cleanEnv'))
+  t.same(app.cleanEnv, cleanEnv)
+  t.ok(app.hasDecorator('makeValidator'))
+  t.same(app.makeValidator, makeValidator)
 })
 
 test('should produce the correct env', async t => {
-  t.plan(1)
-  const app = require('fastify')()
+  t.plan(2)
+  const app = fastify()
 
-  app.register(require('..'))
+  app.register(fastifyEnvalid)
 
   await app.ready()
-  t.deepEqual(app.cleanEnv(process.env), cleanEnv(process.env))
+
+  const pluginEnv = app.cleanEnv(env, {
+    API_KEY: app.validators.num(),
+    NODE_ENV: app.validators.str()
+  })
+  const envalidEnv = cleanEnv(env, {
+    API_KEY: app.validators.num(),
+    NODE_ENV: app.validators.str()
+  })
+
+  t.same(pluginEnv.API_KEY, envalidEnv.API_KEY)
+  t.same(pluginEnv.NODE_ENV, envalidEnv.NODE_ENV)
 })

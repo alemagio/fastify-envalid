@@ -1,7 +1,5 @@
-'use strict'
-
-const fp = require('fastify-plugin')
-const {
+import fp from 'fastify-plugin'
+import {
   str,
   bool,
   num,
@@ -11,9 +9,9 @@ const {
   json,
   cleanEnv,
   makeValidator
-} = require('envalid')
+} from 'envalid'
 
-module.exports = fp(async function (fastify, opts) {
+export default fp(async function (fastify, opts) {
   fastify.decorate('validators', {
     str,
     bool,
