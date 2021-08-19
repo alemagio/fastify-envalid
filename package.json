@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "test": "test"
   },
@@ -32,18 +33,18 @@
   "license": "MIT",
   "types": "index.d.ts",
   "dependencies": {
-    "envalid": "^6.0.2",
+    "envalid": "^7.2.1",
     "fastify-plugin": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^14.0.18",
-    "fastify": "^3.8.0",
-    "fastify-tsconfig": "^1.0.0",
-    "standard": "^14.3.3",
-    "tap": "^14.0.0",
-    "ts-standard": "^9.0.0",
-    "tsd": "^0.13.1",
-    "typescript": "^4.0.2"
+    "@types/node": "^16.6.2",
+    "fastify": "^3.20.2",
+    "fastify-tsconfig": "^1.0.1",
+    "standard": "^16.0.3",
+    "tap": "^15.0.9",
+    "ts-standard": "^10.0.0",
+    "tsd": "^0.17.0",
+    "typescript": "^4.3.5"
   },
   "tsd": {
     "directory": "test"
