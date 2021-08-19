@@ -1,5 +1,5 @@
 import { FastifyPlugin } from 'fastify'
-import { Spec, ValidatorSpec, CleanOptions, StrictCleanOptions, CleanEnv } from 'envalid'
+import { Spec, ValidatorSpec, CleanOptions, CleanedEnvAccessors } from 'envalid'
 
 declare module 'fastify' {
   export interface FastifyInstance {
@@ -32,17 +32,9 @@ export interface Validators {
 
 }
 
-export declare type CleanEnvFunction = <T>(
-  environment: unknown,
-  validators?: { [K in keyof T]: ValidatorSpec<T[K]> },
-  options?: CleanOptions
-) => Readonly<T> & CleanEnv
-
-export declare type StrictCleanEnvFunction = <T>(
-  environment: unknown,
-  validators?: { [K in keyof T]: ValidatorSpec<T[K]> },
-  options?: StrictCleanOptions
-) => Readonly<T> & CleanEnv & { readonly [varName: string]: string | undefined }
+export declare type CleanEnvFunction = <T>(environment: unknown, specs: {
+  [K in keyof T]: ValidatorSpec<T[K]>;
+}, options?: CleanOptions<T>) => Readonly<T & CleanedEnvAccessors>
 
 declare const fastifyEnvalid: FastifyPlugin
 export default fastifyEnvalid
