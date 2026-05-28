@@ -63,3 +63,30 @@ test('should produce the correct env', async t => {
   t.same(pluginEnv.API_KEY, envalidEnv.API_KEY)
   t.same(pluginEnv.NODE_ENV, envalidEnv.NODE_ENV)
 })
+
+test('should support custom validators via makeValidator', async t => {
+  t.plan(2)
+
+  const app = fastify()
+  app.register(fastifyEnvalid)
+  await app.ready()
+
+  const isEven = app.makeValidator((input) => {
+    const n = Number(input)
+    if (!Number.isInteger(n) || n % 2 !== 0) {
+      throw new Error('Must be an even integer')
+    }
+    return n
+  })
+
+  const result = app.cleanEnv({ FOO: '42' }, {
+    FOO: isEven()
+  })
+  t.equal(result.FOO, 42)
+
+  // envalid calls process.exit(1) on invalid env, so intercept it
+  const origExit = process.exit
+  process.exit = (code) => { throw new Error('process.exit') }
+  t.throws(() => app.cleanEnv({ FOO: '43' }, { FOO: isEven() }))
+  process.exit = origExit
+})
