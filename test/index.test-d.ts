@@ -11,8 +11,8 @@ try {
   expectType<Validators>(app.validators)
   expectType<CleanEnvFunction>(app.cleanEnv)
   expectType<<T>(
-  parser: (input: string) => T,
-  type?: string
+    parser: (input: string) => T,
+    type?: string
   ) => (spec?: Spec<T>) => ValidatorSpec<T>>(app.makeValidator)
 } catch (err) {
   console.error(err)

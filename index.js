@@ -23,4 +23,4 @@ export default fp(async function (fastify, opts) {
   })
   fastify.decorate('cleanEnv', cleanEnv)
   fastify.decorate('makeValidator', makeValidator)
-}, { fastify: '3.x' })
+}, { fastify: '4.x' })

@@ -2,7 +2,9 @@
     "extends": "fastify-tsconfig",
     "compilerOptions": {
       "noEmit": true,
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "module": "ES2022",
+      "moduleResolution": "node"
     },
     "include": [
         "**/*.ts"
