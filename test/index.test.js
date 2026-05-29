@@ -7,6 +7,7 @@ import {
   host,
   url,
   json,
+  port,
   cleanEnv,
   makeValidator
 } from 'envalid'
@@ -35,7 +36,8 @@ test('should register the correct decorators', async t => {
     email,
     host,
     url,
-    json
+    json,
+    port
   })
   t.ok(app.hasDecorator('cleanEnv'))
   t.same(app.cleanEnv, cleanEnv)
