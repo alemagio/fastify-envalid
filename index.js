@@ -7,6 +7,7 @@ import {
   host,
   url,
   json,
+  port,
   cleanEnv,
   makeValidator
 } from 'envalid'
@@ -19,7 +20,8 @@ export default fp(async function (fastify, opts) {
     email,
     host,
     url,
-    json
+    json,
+    port
   })
   fastify.decorate('cleanEnv', cleanEnv)
   fastify.decorate('makeValidator', makeValidator)
