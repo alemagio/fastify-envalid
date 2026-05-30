@@ -11,7 +11,7 @@ import {
   makeValidator
 } from 'envalid'
 import fastify from 'fastify'
-import fastifyEnvalid from '../index.js'
+import fastifyEnvalid from '../dist/index.js'
 
 const env = {
   API_KEY: 123,

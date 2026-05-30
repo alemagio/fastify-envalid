@@ -2,13 +2,21 @@
   "name": "fastify-envalid",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "npm run lint && npm run unit && npm run test:typescript",
+    "build": "tsc",
+    "test": "npm run build && npm run lint && npm run unit && npm run test:typescript",
     "lint": "standard && npm run lint:typescript",
     "lint:typescript": "ts-standard",
     "test:typescript": "tsd",
@@ -31,12 +39,11 @@
     "url": "git+https://github.com/alemagio/fastify-envalid.git"
   },
   "license": "MIT",
-  "types": "index.d.ts",
   "dependencies": {
     "fastify-plugin": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^16.6.2",
+    "@types/node": "^16.11.0",
     "fastify": "^3.20.2",
     "fastify-tsconfig": "^1.0.1",
     "standard": "^16.0.3",
@@ -49,11 +56,20 @@
     "directory": "test"
   },
   "files": [
-    "index.d.ts"
+    "dist",
+    "!dist/test",
+    "!dist/examples"
   ],
+  "standard": {
+    "ignore": [
+      "dist"
+    ]
+  },
   "ts-standard": {
     "ignore": [
-      "examples"
+      "examples",
+      "dist",
+      "test"
     ]
   },
   "peerDependencies": {
